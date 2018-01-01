@@ -23,7 +23,7 @@ class Translate
     {
         $rows = [];
         foreach ($arrFiles as $file) {
-            $filePath = leedch_pathTranslations . $file;
+            $filePath = $file;
             if (!file_exists($filePath)) {
                 continue;
             }
