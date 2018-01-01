@@ -1,0 +1,41 @@
+{
+    "name": "leedch/translate",
+    "type": "library",
+    "description": "Loads translations from CSV Files, for use in PHP and leedch/view",
+    "keywords": [
+        "leedch",
+        "translation"
+    ],
+    "homepage": "https://github.com/leedave/trakt.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Lee",
+            "email": "leed@leed.ch",
+            "homepage": "https://www.leed.ch/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "~7.0|~7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Leedch\\Translate\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Leedch\\Translate\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
