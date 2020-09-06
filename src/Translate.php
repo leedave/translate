@@ -58,4 +58,14 @@ class Translate
         }
         return $t->translations[$code];
     }
+    
+    public static function jsonReturnAll() 
+    {
+        $arrResponse = [];
+        $t = self::getInstance();
+        foreach ($t->translations as $key => $val) {
+            $arrResponse[$key] = $val;
+        }
+        return json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+    }
 }
