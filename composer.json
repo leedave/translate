@@ -24,9 +24,6 @@
             "Leedch\\Translate\\": "src"
         }
     },
-    "scripts": {
-        "test": "phpunit"
-    },
     "config": {
         "sort-packages": true
     }
