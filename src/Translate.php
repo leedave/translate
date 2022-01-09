@@ -30,7 +30,7 @@ class Translate
             $file = fopen($filePath, "r");
             while (!feof($file)) {
                 $fRow = fgetcsv($file, 0, ",");
-                if (count($fRow) < 2) {
+                if (!is_array($fRow) || count($fRow) < 2) {
                     continue;
                 }
                 $rows[$fRow[0]] = $fRow[1];
