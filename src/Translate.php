@@ -9,37 +9,37 @@ namespace Leedch\Translate;
  */
 class Translate
 {
-    private $translations = [];
-    private static $instance;
+    private array $translations = [];
+    private static $instance = null;
 
-    public static function getInstance(){
-        if(!self::$instance){
-            self::$instance = new self();
+    public static function getInstance(): static
+    {
+        if(!static::$instance){
+            static::$instance = new static();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
-    public function loadTranslations(array $arrFiles)
+    public function loadTranslations(array $arrFiles): void
     {
         $rows = [];
-        foreach ($arrFiles as $file) {
-            $filePath = $file;
+        foreach ($arrFiles as $filePath) {
             if (!file_exists($filePath)) {
                 continue;
             }
             $file = fopen($filePath, "r");
-            while (!feof($file)) {
-                $fRow = fgetcsv($file, 0, ",");
-                if (!is_array($fRow) || count($fRow) < 2) {
+            while (($fRow = fgetcsv($h, 0, ',', '"')) !== false) {
+                if (count($fRow) < 2) {
                     continue;
                 }
                 $rows[$fRow[0]] = $fRow[1];
             }
+            fclose($file);
         }
         $this->translations = $rows;
     }
 
-    public function getTranslations() : array
+    public function getTranslations(): array
     {
         return $this->translations;
     }
@@ -53,19 +53,11 @@ class Translate
     public static function __(string $code): string
     {
         $t = self::getInstance();
-        if (!isset($t->translations[$code])) {
-            return $code;
-        }
-        return $t->translations[$code];
+        return $t->translations[$code] ?? $code;
     }
 
-    public static function jsonReturnAll()
+    public static function jsonReturnAll(): string
     {
-        $arrResponse = [];
-        $t = self::getInstance();
-        foreach ($t->translations as $key => $val) {
-            $arrResponse[$key] = $val;
-        }
-        return json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        return json_encode(static::getInstance()->translations, JSON_UNESCAPED_UNICODE) ?: '[]';
     }
 }

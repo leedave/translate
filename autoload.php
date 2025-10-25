@@ -19,7 +19,7 @@
 //　　██▄▄▄▄▀▀┴┴╚╧╧╝╧╧╝┴┴███
 //　　██████████████████████
 spl_autoload_register(function ($class) {
-    $prefix = 'Leedch\\Translate';
+    $prefix = 'Leedch\\Translate\\';
 
     $base_dir = __DIR__ . '/src/';
     
@@ -31,13 +31,13 @@ spl_autoload_register(function ($class) {
         return;
     }
 
-    $relative_class = substr($class, $len);
+    $relative_class = ltrim(substr($class, $len), '\\');
 
     //Replace namespace with directory
     $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
     //if exists, require
-    if (file_exists($file)) {
-        require $file;
+    if (is_file($file)) {
+        require_once $file;
     }
 });
