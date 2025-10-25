@@ -10,7 +10,7 @@ namespace Leedch\Translate;
 class Translate
 {
     private array $translations = [];
-    private $instance = null;
+    private static $instance = null;
 
     public static function getInstance(): static
     {
