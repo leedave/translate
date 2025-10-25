@@ -28,7 +28,7 @@ class Translate
                 continue;
             }
             $file = fopen($filePath, "r");
-            while (($fRow = fgetcsv($file, 0, ',', '"')) !== false) {
+            while (($fRow = fgetcsv($file, 0, ',', '"', '\\')) !== false) {
                 if (count($fRow) < 2) {
                     continue;
                 }
